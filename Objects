@@ -1,6 +1,6 @@
 function Product(id, name, des, price,
     brand, sizes, a_s, quan, images, id_r,
-     author, comm, serv, price_r, value, quality){   
+    author, comm, serv, price_r, value, quality){   
     this.ID = id,
     this.name = name,
     this.description = des,
@@ -23,24 +23,32 @@ let guitar = new Product('293755', 'guitar', 'Custom shop with 3 humbuckers', 46
  'Ibanez', ['XS', 'S', 'M', 'L', 'XL', 'XXL'], 'L', 32, ['Im1', 'Im2', 'Im3'], '223142',
  'Roman', 'Zvuchki kitai!', 3, 5, 4, 5)
 
+ let bass = new Product('493765', 'bass', '5 string bass', 500,
+ 'Fender', ['XS', 'S', 'M', 'L', 'XL', 'XXL'], 'M', 30, ['Im1', 'Im2', 'Im3'], '843142',
+ 'Alex', 'Top temka', 5, 5, 4, 5)
+
+let new_review = new addReview('323145', 'Vasya', 'Kraska zhodut, A tak norm', 5, 5, 4, 4)
+
 function getMyProperty(){
-    for (let key in guitar){
-        console.log(guitar[key])
-    } 
+    let x = prompt("Enter key you want to see")
+    return guitar[x]
 }
 
 function setMyProperty(){
-    for (let key in guitar){
-        guitar[this.key] = prompt(`Enter new property for${key}`)
-    } 
+    let x = prompt("Enter key you want to change")
+    guitar[x] = prompt(`Enter new property for${x}`)
+    return guitar[x]
 }
 
 ///Возвращает объект "отзыв" по заданному ключу
 function getReviewByID(){
     let x = prompt("Enter your key")
-    for (let [key] in rewievs){
+    for (let [key] in this.rewievs){
         if ([key] == x){
-            console.log(this.rewievs)
+            return this.rewievs
+        }
+        else {
+            continue
         }
     }
 }
@@ -48,7 +56,7 @@ function getReviewByID(){
 ///Возвращает картинку по переданному параметру, если параметр не был передан то первую картинку из массива
 function getImage(){
     let x = prompt("What image you want to see?")
-    console.log(this.images[x])
+    return (this.images[x])
 }
 
 
@@ -56,35 +64,58 @@ function getImage(){
 function addSize(){
     let x = prompt("What size you want to add?")
     this.sizes.push(x) 
+    return this.sizes
 }
 
 ///Удаляет значение из массива «sizes» по заданному ключу
 function deleteSize(){
     let x = prompt("What size you want to delete?")
     delete this.sizes[x]
+    return this.sizes
 }
 
-///Добавляет объект "отзыв" в массив «reviews» (???)
-function addReview(){
-    for (let key in this.rewievs){
-        this.rewievs[key] = prompt(`Enter new property for${key}`)
-    }
+///Добавляет объект "отзыв" в массив «reviews» 
+function addReview(id_r, author, comm, serv, price_r, value, quality){
+    this.rewievs = new Array(this.ID_r = id_r,
+    this.author = author,
+    this.date_r = new Date(),
+    this.comment = comm,
+    this.rating = new Array(this.service = serv, this.price_r = price_r, this.value = value, this.quality = quality)
+    )
+    return this.rewievs              
 }
 
 ///Удаляет объект "отзыв" из массива «reviews» по заданному ключу (ID)
 function deleteReview(){
     let x = prompt("Enter ID you want to delete")
-    for (let [key] in rewievs){
+    for (let key in this.rewievs){
         if ([key] == x){
             delete this.rewievs
         }
+        else {
+            continue
+        }
     }
+    return guitar
 }
 
 ///Возвращает средний рейтинг продукта
 function getAverageRating(){
-    console.log((this.service + this.price_r + this.value + this.quality) / 4)
+    return (this.service + this.price_r + this.value + this.quality) / 4
 }
 
-guitar.f = addReview;
-guitar.f();
+let products = [guitar, bass]
+let search = prompt("Enter product you wanna find")
+
+function searchProducts(products, search){
+    for (let prod in products){
+        if (prod == search){
+            return prod
+        }
+        else {
+            return "There is no such product"
+        } 
+    }
+}
+
+searchProducts(products, search)
