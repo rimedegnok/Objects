@@ -29,7 +29,7 @@ let guitar = new Product('293755', 'guitar', 'Custom shop with 3 humbuckers', 40
 
 let new_review = new addReview('323145', 'Vasya', 'Kraska zhodut, A tak norm', 5, 5, 4, 4)
 
-/* function getMyProperty(){
+ function getMyProperty(){
     let x = prompt("Enter key you want to see")
     return guitar[x]
 }
@@ -103,7 +103,6 @@ function deleteReview(){
 function getAverageRating(){
     return (this.service + this.price_r + this.value + this.quality) / 4
 }
-*/
 
 let products = [guitar, bass]
 let products_n = [guitar.name, bass.name]
