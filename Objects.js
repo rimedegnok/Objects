@@ -19,7 +19,7 @@ function Product(id, name, des, price,
     )                                   
 } 
 
-let guitar = new Product('293755', 'guitar', 'Custom shop with 3 humbuckers', 460.50,
+let guitar = new Product('293755', 'guitar', 'Custom shop with 3 humbuckers', 400,
  'Ibanez', ['XS', 'S', 'M', 'L', 'XL', 'XXL'], 'L', 32, ['Im1', 'Im2', 'Im3'], '223142',
  'Roman', 'Zvuchki kitai!', 3, 5, 4, 5)
 
@@ -29,7 +29,7 @@ let guitar = new Product('293755', 'guitar', 'Custom shop with 3 humbuckers', 46
 
 let new_review = new addReview('323145', 'Vasya', 'Kraska zhodut, A tak norm', 5, 5, 4, 4)
 
-function getMyProperty(){
+/* function getMyProperty(){
     let x = prompt("Enter key you want to see")
     return guitar[x]
 }
@@ -103,19 +103,31 @@ function deleteReview(){
 function getAverageRating(){
     return (this.service + this.price_r + this.value + this.quality) / 4
 }
+*/
 
 let products = [guitar, bass]
-let search = prompt("Enter product you wanna find")
+let products_n = [guitar.name, bass.name]
+///let search = prompt("Enter product you wanna find")
+let s_p = []
 
-function searchProducts(products, search){
-    for (let prod in products){
-        if (prod == search){
-            return prod
+function searchProducts(products_n, search){
+    for (let i = 0; i < products.length; i++){
+        if (products_n[i] == search){
+            s_p.push(products[i])
         }
-        else {
-            return "There is no such product"
-        } 
     }
+    console.log(s_p)
 }
 
-searchProducts(products, search)
+function sortRule(a, b){
+    if (a > b) return 1
+    if (a == b) return 0
+    if (a < b) return -1  
+} 
+
+let products_p = [guitar.price, bass.price]
+
+function sortProducts(products_p, sortRule){
+    products_p.sort(sortRule)
+    return products_p
+}
