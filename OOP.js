@@ -16,18 +16,93 @@ class AbstractProduct{
     getPriceForQuantity(){
         return '$' + this.price
     }
-    getterSetter(characteristic){
-        let choice = prompt('get or set?')
+    getterSetter(characteristic, choice){
         if (choice == 'get'){
             return this.characteristic
         }
         if (choice == 'set'){
-            let newchar = prompt('How you want to change it?')
-            this.characteristic = newchar
+            this.characteristic = characteristic
         }
         else {
             return 'Error! There is no such option'
         }
+    }
+    
+    ///Возвращает объект "отзыв" по заданному ключу
+    getReviewByID(rev){
+        for (let [key] in this.rewievs){
+            if ([key] == rev){
+                return this.rewievs
+            }
+            else {
+                continue
+            }
+        }
+    }
+    
+    ///Возвращает картинку по переданному параметру, если параметр не был передан то первую картинку из массива
+    getImage(im){
+        return (this.images[im])
+    }
+    
+    
+    ///Добавляет новое значение в массив «sizes»
+    addSize(add_s){
+        this.sizes.push(add_s) 
+    }
+    
+    ///Удаляет значение из массива «sizes» по заданному ключу
+    deleteSize(del_s){
+        delete this.sizes[del_s]
+    }
+    
+    ///Добавляет объект "отзыв" в массив «reviews» 
+    addReview(id_r, author, comm, serv, price_r, value, quality){
+        this.rewievs = new Array(this.ID_r = id_r,
+        this.author = author,
+        this.date_r = Date.now(),
+        this.comment = comm,
+        this.rating = new Array(this.service = serv, this.price_r = price_r, this.value = value, this.quality = quality)
+        )
+        return this.rewievs              
+    }
+    
+    ///Удаляет объект "отзыв" из массива «reviews» по заданному ключу (ID)
+    deleteReview(del_rev){
+        for (let key in this.rewievs){
+            if ([key] == del_rev){
+                delete this.rewievs
+            }
+            else {
+                continue
+            }
+        }
+    }
+    
+    ///Возвращает средний рейтинг продукта
+    getAverageRating(){
+        return (this.service + this.price_r + this.value + this.quality) / 4
+    }
+    
+    searchProducts(products_n, search){
+        let s_p = []
+        for (let i = 0; i < products.length; i++){
+            if (products_n[i] == search){
+                s_p.push(products[i])
+            }
+        }
+        console.log(s_p)
+    }
+    
+    sortRule(a, b){
+        if (a > b) return 1
+        if (a == b) return 0
+        if (a < b) return -1  
+    } 
+
+    sortProducts(products_p, sortRule){
+        products_p.sort(sortRule)
+        return products_p
     }
 }
 
@@ -71,8 +146,3 @@ class Electronics extends AbstractProduct{
         this.power = power
     }
 }
-
-let guitar = new AbstractProduct('889597', 'Guitar', 'electric guitar with 2 humbuckers', 32.5, 3, 'Good for playing black metal', '36246246', 'Ibanez')
-
-let characteristic = prompt('Enter your characteristic')
-guitar.getterSetter(characteristic)
